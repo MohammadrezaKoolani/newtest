@@ -41,45 +41,45 @@ roslaunch tutorial_pkg all.launch
 
 ## Code Description
 
-### ROS Robot Controller Logic Code
+#### ROS Robot Controller Logic Code
 
 The robot_controller script serves as the logic for controlling a robot's behavior based on information received from markers. It subscribes to a custom ROS message type (info.msg) that contains marker information.
 
-### Dependencies:
+#### Dependencies:
 rospy: ROS Python library
 Twist: ROS message type for sending velocity commands
 info: Custom ROS message type for exchanging marker information
 math: Python math library
 
-### Initialization:
+#### Initialization:
 The ROS node is initialized with the name 'robot_controller'.
 Initial values such as the list of markers (marker_list), distance threshold (distance_th), misalignment threshold (misalignment_th), and the initial state (state) are set.
 ROS publishers and subscribers are set up, including the /cmd_vel topic for velocity commands and the /info topic for marker information.
 
-### Callback Function:
+#### Callback Function:
 The info_clbk function is a callback for the /info topic, updating the script's internal msg variable with the received marker information.
 
-### Search Function:
+#### Search Function:
 The search function is responsible for searching for a specified marker.
 It adjusts the robot's angular velocity to rotate until the desired marker is detected.
 Upon detection, it transitions the state to 'align'.
 
-### Align Function:
+#### Align Function:
 The align function is called when the robot is misaligned with the marker's center.
 It adjusts the robot's angular velocity to align the marker's center with the center of the camera frame.
 Upon alignment, it transitions the state to 'drive'.
 
-### Drive Function:
+#### Drive Function:
 The drive function moves the robot forward toward the detected marker.
 It adjusts the robot's linear velocity based on the distance from the marker.
 Upon reaching the desired marker, it updates the marker index and transitions back to the 'search' state.
 If all markers are found, the state transitions to 'drive', stopping the robot.
 
-### Main Loop:
+#### Main Loop:
 The main_loop function is the main execution loop of the script.
 It continuously checks the robot's state and executes the corresponding behavior.
 
-### Script Execution:
+#### Script Execution:
 An instance of the RobotController class is created.
 The main_loop function is called, and the script continues to run until a ROS interrupt occurs.
 
